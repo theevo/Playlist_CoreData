@@ -1,21 +1,21 @@
 # Playlist Coredata - Part 1
 ## Part 1 - Setting up Core Data
-1. In our `xcdatamodel` we need to add our two entities
-		* Playlist
-			* Attributes
-				* name: String
-			* Relationships
-				* name: `songs`
-				* Destination: `Song`
-				* Inverse: `playlist`
-		* Song
-			* Attributes
-				* artist: String
-				* name: String
-			* Relationships
-				* name: `playlist`
-				* Destination: `Playlist`
-				* Inverse: `songs`
+1. In our `xcdatamodel` we need to add our two entities.
+	* Playlist
+		* Attributes
+			* name: String
+		* Relationships
+			* name: `songs`
+			* Destination: `Song`
+			* Inverse: `playlist`
+	* Song
+		* Attributes
+			* artist: String
+			* name: String
+		* Relationships
+			* name: `playlist`
+			* Destination: `Playlist`		
+			* Inverse: `songs`
 
 Make sure the the relationship on `Playlist` is set too `To Many` and that it is ordered. The relationship on `Song` should be set to `To One` be default , but double check just to be sure. You can do all of this on the side bar.
 
@@ -148,13 +148,13 @@ Create the following views below
 Note: The two `UITextFields` on the right `TableViewController` are on a `UIView`
 
 ### Playlist Table View Controller
-	1. Create a new `Cocoa Touch Class` called `PlaylistListTableViewController`
-		* Remove all functions except for 
-			1. `ViewDidLoad()`
-			2. `override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int`
-			3. `override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell`
-			4. `override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath:nIndexPath)`
-			5. `override func prepare(for segue: UIStoryboardSegue, sender: Any?)`
+1. Create a new `Cocoa Touch Class` called `PlaylistListTableViewController`
+	* Remove all functions except for 
+	1. `ViewDidLoad()`
+	2. `override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int`
+	3. `override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell`
+	4. `override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath:nIndexPath)`
+	5. `override func prepare(for segue: UIStoryboardSegue, sender: Any?)`
 		
 #### Add Playlist Functionality
 1. Drag out our an `IBOutlet` for our `playlistNameTextField`
