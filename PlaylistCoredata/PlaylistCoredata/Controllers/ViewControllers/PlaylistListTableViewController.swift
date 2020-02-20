@@ -33,13 +33,13 @@ class PlaylistListTableViewController: UITableViewController {
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return PlaylistController.shared.playlists.count
+        return PlaylistController.shared.fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "playlistCell", for: indexPath)
         
-        let playlist = PlaylistController.shared.playlists[indexPath.row]
+        let playlist = PlaylistController.shared.fetchedResultsController.object(at: indexPath)
         let songCount = playlist.songs?.count ?? 0
         
         cell.textLabel?.text = playlist.name
@@ -52,7 +52,7 @@ class PlaylistListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             //Grabbing out playlist
-            let playlist = PlaylistController.shared.playlists[indexPath.row]
+            let playlist = PlaylistController.shared.fetchedResultsController.object(at: indexPath)
             //Passing our playlist to our delete function
             PlaylistController.shared.delete(playlist: playlist)
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -65,7 +65,7 @@ class PlaylistListTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetailVC" {
             guard let index = tableView.indexPathForSelectedRow, let destinationVC = segue.destination as? SongListTableViewController else {return}
-            let playlist = PlaylistController.shared.playlists[index.row]
+            let playlist = PlaylistController.shared.fetchedResultsController.object(at: index)
             destinationVC.playlist = playlist
         }
     }
