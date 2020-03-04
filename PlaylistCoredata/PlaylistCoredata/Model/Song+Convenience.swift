@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 extension Song {
-    
+    @discardableResult
     convenience init(name: String, artist: String, playlist: Playlist, moc: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: moc)
         self.name = name
