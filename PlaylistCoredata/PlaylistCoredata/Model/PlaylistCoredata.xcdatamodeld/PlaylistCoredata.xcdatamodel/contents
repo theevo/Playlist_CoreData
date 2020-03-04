@@ -2,12 +2,12 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Playlist" representedClassName="Playlist" syncable="YES" codeGenerationType="class">
         <attribute name="name" attributeType="String"/>
-        <relationship name="songs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Song" inverseName="playlist" inverseEntity="Song"/>
+        <relationship name="songs" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Song" inverseName="playlist" inverseEntity="Song"/>
     </entity>
     <entity name="Song" representedClassName="Song" syncable="YES" codeGenerationType="class">
         <attribute name="artist" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="playlist" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Playlist" inverseName="songs" inverseEntity="Playlist"/>
+        <relationship name="playlist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Playlist" inverseName="songs" inverseEntity="Playlist"/>
     </entity>
     <elements>
         <element name="Playlist" positionX="-63" positionY="-18" width="128" height="73"/>

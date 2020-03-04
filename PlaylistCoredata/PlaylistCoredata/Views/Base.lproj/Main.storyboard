@@ -37,7 +37,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="cWY-RA-ogD" detailTextLabel="N4B-l0-SPZ" style="IBUITableViewCellStyleValue1" id="zRj-8d-QNU">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="playlistCell" textLabel="cWY-RA-ogD" detailTextLabel="N4B-l0-SPZ" style="IBUITableViewCellStyleValue1" id="zRj-8d-QNU">
                                         <rect key="frame" x="0.0" y="72" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zRj-8d-QNU" id="gDD-cJ-dxC">
@@ -61,7 +61,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="ueo-bL-fFf" kind="show" id="Uy9-Wr-OtA"/>
+                                            <segue destination="ueo-bL-fFf" kind="show" identifier="toPlaylistDetail" id="Uy9-Wr-OtA"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -84,6 +84,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="playlistNameTextField" destination="BLq-mg-PfS" id="N2I-f3-Z11"/>
                         <outlet property="playlistTableView" destination="hGN-FN-4k4" id="Y7J-Tj-Mgu"/>
                     </connections>
                 </viewController>
@@ -131,7 +132,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="hSZ-YU-byw" detailTextLabel="TPe-MP-BDY" style="IBUITableViewCellStyleSubtitle" id="YRP-Nr-1hY">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="songCell" textLabel="hSZ-YU-byw" detailTextLabel="TPe-MP-BDY" style="IBUITableViewCellStyleSubtitle" id="YRP-Nr-1hY">
                                         <rect key="frame" x="0.0" y="137" width="414" height="55.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YRP-Nr-1hY" id="xzu-N0-9qc">
@@ -168,8 +169,17 @@
                         <viewLayoutGuide key="safeArea" id="4m5-SS-3Hr"/>
                     </view>
                     <navigationItem key="navigationItem" title="Songs" id="CeN-A1-qke">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="SuA-Ml-QyA"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="SuA-Ml-QyA">
+                            <connections>
+                                <action selector="addButtonTapped:" destination="ueo-bL-fFf" id="vz6-L4-ICL"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="artistTextField" destination="DPs-M8-hdf" id="2tS-wG-CRT"/>
+                        <outlet property="songFieldsTableView" destination="BD4-Jo-1W0" id="pky-QN-IkG"/>
+                        <outlet property="songTextField" destination="nAg-Sv-Soo" id="apl-6W-B1u"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ySG-BT-ghA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
