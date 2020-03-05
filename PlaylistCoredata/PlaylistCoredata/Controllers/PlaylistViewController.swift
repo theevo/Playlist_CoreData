@@ -46,7 +46,7 @@ class PlaylistViewController: UIViewController {
             guard let indexPath = playlistTableView.indexPathForSelectedRow,
                 let destinationVC = segue.destination as? SongsViewController
                 else { return }
-            let playlistToSend = PlaylistController.sharedInstance.playlists[indexPath.row]
+            let playlistToSend = PlaylistController.sharedInstance.fetchResultsController.object(at: indexPath)
             destinationVC.playlistLandingPad = playlistToSend
         }
     }
@@ -61,12 +61,12 @@ class PlaylistViewController: UIViewController {
 
 extension PlaylistViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PlaylistController.sharedInstance.playlists.count
+        return PlaylistController.sharedInstance.fetchResultsController.fetchedObjects?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = playlistTableView.dequeueReusableCell(withIdentifier: "playlistCell", for: indexPath)
-        let playlist = PlaylistController.sharedInstance.playlists[indexPath.row]
+        let playlist = PlaylistController.sharedInstance.fetchResultsController.object(at: indexPath)
         let songCount = playlist.songs?.count ?? 0
         cell.textLabel?.text = playlist.name
         cell.detailTextLabel?.text = "\(songCount)"
@@ -77,7 +77,7 @@ extension PlaylistViewController: UITableViewDataSource {
 extension PlaylistViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let playlistToDelete = PlaylistController.sharedInstance.playlists[indexPath.row]
+            let playlistToDelete = PlaylistController.sharedInstance.fetchResultsController.object(at: indexPath)
             PlaylistController.sharedInstance.deletePlaylist(playlist: playlistToDelete)
             playlistTableView.deleteRows(at: [indexPath], with: .fade)
         }

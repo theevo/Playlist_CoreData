@@ -13,13 +13,24 @@ class PlaylistController {
     
     // MARK: - Singleton
     static let sharedInstance = PlaylistController()
+    var fetchResultsController: NSFetchedResultsController<Playlist>
     
     // MARK: - Source of truth
-    var playlists: [Playlist] {
-        let fetchRequest: NSFetchRequest<Playlist> = Playlist.fetchRequest()
-        return (try? CoreDataStack.context.fetch(fetchRequest)) ?? [] // nil coalescing
+
+    init(){
+        let request: NSFetchRequest<Playlist> = Playlist.fetchRequest()
+        
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        let resultsController: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
+        fetchResultsController = resultsController
+        
+        do {
+            try fetchResultsController.performFetch()
+        } catch {
+            print("Fetch error. \(error.localizedDescription)\(#function)")
+        }
     }
-    
     
     // MARK: - CRUD
     
